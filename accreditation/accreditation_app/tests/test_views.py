@@ -41,12 +41,14 @@ class UserApplicationAcceptedPageTest(TestCase):
     first_name = 'Emily'
     last_name = 'Svensson'
     email = 'emily.svensson@test.com'
+    type_of_accreditation = 'photo'
     application = 'I am photographer'
 
     data = {
         'first_name': first_name,
         'last_name': last_name,
         'email': email,
+        'type_of_accreditation': type_of_accreditation,
         'application': application
     }
 
@@ -66,10 +68,8 @@ class UserApplicationAcceptedPageTest(TestCase):
             ),
             html
         )
-        self.assertIn(
-            self.application,
-            html
-        )
+        self.assertIn(self.application, html)
+        self.assertIn(self.type_of_accreditation, html)
         self.assertTrue(html.strip().endswith('</html>'))
 
         self.assertTemplateUsed(response, 'application_accepted.html')
@@ -90,6 +90,7 @@ class UserApplicationAcceptedPageTest(TestCase):
             'first_name': '',
             'last_name': self.last_name,
             'email': self.email,
+            'type_of_accreditation': self.type_of_accreditation,
             'application': self.application
         }
         assert_data(self, data)
@@ -99,6 +100,7 @@ class UserApplicationAcceptedPageTest(TestCase):
             'first_name': self.first_name,
             'last_name': '',
             'email': self.email,
+            'type_of_accreditation': self.type_of_accreditation,
             'application': self.application
         }
         assert_data(self, data)
@@ -108,6 +110,7 @@ class UserApplicationAcceptedPageTest(TestCase):
             'first_name': self.first_name,
             'last_name': self.last_name,
             'email': '',
+            'type_of_accreditation': self.type_of_accreditation,
             'application': self.application
         }
         assert_data(self, data)
@@ -117,7 +120,20 @@ class UserApplicationAcceptedPageTest(TestCase):
             'first_name': self.first_name,
             'last_name': self.last_name,
             'email': self.email,
+            'type_of_accreditation': self.type_of_accreditation,
             'application': ''
+        }
+        assert_data(self, data)
+
+    def test_validation_error_type_of_accreditation_is_sent_back_to_application_accepted_template(
+        self
+    ):
+        data = {
+            'first_name': 'Emily',
+            'last_name': 'Svensson',
+            'email': self.email,
+            'type_of_accreditation': '',
+            'application': self.application
         }
         assert_data(self, data)
 
@@ -126,6 +142,7 @@ class UserApplicationAcceptedPageTest(TestCase):
             'first_name': 'Emily',
             'last_name': 'Svensson',
             'email': '',
+            'type_of_accreditation': self.type_of_accreditation,
             'application': self.application
         }
         self.client.post('/', data)

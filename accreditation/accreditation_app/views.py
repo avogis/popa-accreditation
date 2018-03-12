@@ -14,12 +14,14 @@ def accreditation_page(request):
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
         email = request.POST['email']
+        type_of_accreditation = request.POST['type_of_accreditation']
         application_text = request.POST['application']
 
         application = AccreditatonApplication.objects.create(
             first_name=first_name,
             last_name=last_name,
             email=email,
+            type_of_accreditation=type_of_accreditation,
             application=application_text
         )
         try:
@@ -47,6 +49,7 @@ def accreditation_page(request):
                 'error': e
             }
         data['application'] = application_text
+        data['type_of_accreditation'] = type_of_accreditation
         return render(request, 'application_accepted.html', data)
     else:
         return render(request, 'accreditation.html')

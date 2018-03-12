@@ -21,6 +21,7 @@ class NewVisitorTest(unittest.TestCase):
         self.name = 'Emily'
         self.surname = 'Svensson'
         self.email = 'emily.svensson@test.com'
+        self.type_of_accreditation = 'photo'
         self.application = 'I am photographer'
 
     def tearDown(self):
@@ -44,13 +45,21 @@ class NewVisitorTest(unittest.TestCase):
         input_help_function(self, 'id_last_name', 'Last Name', self.surname)
 
         # The user sees an inputbox where she can enter the reason for application
+        select_box = self.browser.find_element_by_id('type_of_accreditation')
+        options = [x.text for x in select_box.find_elements_by_tag_name('option')]
+        expected_option = ['', 'Photo Pass', 'Festival Pass', 'Journalist Pass']
+        for i in range(len(options)):
+            self.assertEqual(expected_option[i], options[i])
+        self.browser.find_element_by_id('photo').click()
+
+        # The user sees an inputbox where she can enter the reason for application
         input_help_function(self, 'id_application', 'Futher information', self.application)
 
         # The user sees an inputbox where she can enter email
         input_help_function(self, 'id_email', 'Email', self.email)
 
         # She clicks the send_button and then sees that the page updates to say
-        # that her application will be reviewed and she will receive further info via email
+        # that her application will be granted and she will receive further info via email
         self.browser.find_element_by_id('send_button').click()
         time.sleep(1)
 
@@ -63,6 +72,9 @@ class NewVisitorTest(unittest.TestCase):
         )
         self.assertTrue(
             self.email in information_to_the_user_div
+        )
+        self.assertTrue(
+            self.type_of_accreditation in information_to_the_user_div
         )
         self.assertTrue(
             self.application in information_to_the_user_div
