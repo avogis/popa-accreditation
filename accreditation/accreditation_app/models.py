@@ -2,7 +2,7 @@ from django.db import models
 from postmark.core import PMMail, PMMailSendException
 
 from accreditation.settings import (
-    POSTMARK_APPLICATION_SENT_TEMPLATE,
+    POSTMARK_APPLICATION_GRANTE_TEMPLATE,
     POSTMARK_SENDER,
 )
 
@@ -27,7 +27,7 @@ class AccreditatonApplication(models.Model):
                 pm = PMMail(
                     to=self.email,
                     sender=POSTMARK_SENDER,
-                    template_id=POSTMARK_APPLICATION_SENT_TEMPLATE,
+                    template_id=POSTMARK_APPLICATION_GRANTE_TEMPLATE,
                     template_model=data
                 )
                 pm.send()
