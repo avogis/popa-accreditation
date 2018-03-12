@@ -10,4 +10,4 @@ admin.site.unregister(User)
 @admin.register(AccreditatonApplication)
 class AccreditatonApplicationAdmin(admin.ModelAdmin):
     search_fields = ('first_name', 'last_name')
-    list_display = ('last_name', 'first_name', 'applied', )
+    list_display = ('last_name', 'first_name', 'applied', 'reviewed', )
