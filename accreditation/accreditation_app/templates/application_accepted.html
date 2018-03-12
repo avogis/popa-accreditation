@@ -3,7 +3,13 @@
         <title>Application Accepted</title>
     </head>
     <body>
+        {% if error %}
+          <div class="form-group has-error">
+            <span class="help-block">{{ error }}</span>
+          </div>
+        {% else %}
         <h1>Your application has been accepted</h1>
         <p id='id_user_info'>{{ first_name }} {{ last_name }} an email with further information was sent to {{ email }}</p>
+        {% endif %}
     </body>
 </html>
