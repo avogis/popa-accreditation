@@ -13,6 +13,7 @@ class AccreditatonApplication(models.Model):
     email = models.EmailField(null=False, blank=False, default='')
     reviewed = models.BooleanField(default=False)
     application = models.TextField(null=False, blank=False, default=None)
+    applied = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return "{} {} {}".format(self.first_name, self.last_name, self.email)

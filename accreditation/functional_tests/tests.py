@@ -44,7 +44,7 @@ class NewVisitorTest(unittest.TestCase):
         input_help_function(self, 'id_last_name', 'Last Name', self.surname)
 
         # The user sees an inputbox where she can enter the reason for application
-        input_help_function(self, 'id_application', 'Reason for applying', self.application)
+        input_help_function(self, 'id_application', 'Futher information', self.application)
 
         # The user sees an inputbox where she can enter email
         input_help_function(self, 'id_email', 'Email', self.email)
