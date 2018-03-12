@@ -25,7 +25,7 @@ class NewVisitorTest(unittest.TestCase):
     def tearDown(self):
         self.browser.quit()
 
-    def test_can_start_a_list_and_retrieve_it_later(self):
+    def test_can_submit_application(self):
         # User goes to accreditation page
         self.browser.get('http://localhost:8000')
 

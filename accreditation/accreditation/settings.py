@@ -32,13 +32,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'accreditation_app.apps.AccreditationAppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'accreditation_app',
 )
 
 MIDDLEWARE = [
@@ -112,8 +112,17 @@ USE_L10N = True
 
 USE_TZ = True
 
+POSTMARK_API_KEY = ''
+
+POSTMARK_SENDER = 'elizaveta@popaganda.se'
+
+POSTMARK_TEST_MODE = True
+
+POSTMARK_APPLICATION_SENT_TEMPLATE = 5293163
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+EMAIL_BACKEND = 'postmark.django_backend.EmailBackend'

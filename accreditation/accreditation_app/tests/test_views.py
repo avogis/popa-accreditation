@@ -1,4 +1,5 @@
 from django.test import TestCase
+from mock import Mock, patch
 
 from accreditation_app.models import AccreditatonApplication
 
@@ -47,7 +48,9 @@ class UserApplicationAcceptedPageTest(TestCase):
         'email': email,
     }
 
-    def test_accreditation_page_returns_correct_html(self):
+    @patch('accreditation_app.views.PMMail', return_value=Mock())
+    def test_accreditation_page_returns_correct_html(self, pm_mock):
+        pm_mock.send().return_value = 'OK'
         response = self.client.post('/', self.data)
         html = response.content.decode('utf8')
         self.assertTrue(html.startswith('<html>'))
@@ -65,9 +68,10 @@ class UserApplicationAcceptedPageTest(TestCase):
 
         self.assertTemplateUsed(response, 'application_accepted.html')
 
-    def test_can_save_a_POST_request(self):
+    @patch('accreditation_app.views.PMMail', return_value=Mock())
+    def test_can_save_a_POST_request(self, pm_mock):
         response = self.client.post('/', self.data)
-
+        pm_mock.send().return_value = 'OK'
         self.assertEqual(AccreditatonApplication.objects.count(), 1)
         new_application = AccreditatonApplication.objects.first()
         self.assertEqual(new_application.first_name, self.first_name)
