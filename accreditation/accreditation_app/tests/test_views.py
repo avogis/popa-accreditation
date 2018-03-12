@@ -41,11 +41,13 @@ class UserApplicationAcceptedPageTest(TestCase):
     first_name = 'Emily'
     last_name = 'Svensson'
     email = 'emily.svensson@test.com'
+    application = 'I am photographer'
 
     data = {
         'first_name': first_name,
         'last_name': last_name,
         'email': email,
+        'application': application
     }
 
     @patch('accreditation_app.views.PMMail', return_value=Mock())
@@ -62,6 +64,10 @@ class UserApplicationAcceptedPageTest(TestCase):
                 self.last_name,
                 self.email
             ),
+            html
+        )
+        self.assertIn(
+            self.application,
             html
         )
         self.assertTrue(html.strip().endswith('</html>'))
@@ -82,24 +88,36 @@ class UserApplicationAcceptedPageTest(TestCase):
     def test_validation_error_name_is_sent_back_to_application_accepted_template(self):
         data = {
             'first_name': '',
-            'last_name': 'Svensson',
-            'email': 'emily.svensson@test.com',
+            'last_name': self.last_name,
+            'email': self.email,
+            'application': self.application
         }
         assert_data(self, data)
 
     def test_validation_error_surname_is_sent_back_to_application_accepted_template(self):
         data = {
-            'first_name': 'Emily',
+            'first_name': self.first_name,
             'last_name': '',
-            'email': 'emily.svensson@test.com',
+            'email': self.email,
+            'application': self.application
         }
         assert_data(self, data)
 
     def test_validation_error_email_is_sent_back_to_application_accepted_template(self):
         data = {
-            'first_name': 'Emily',
-            'last_name': 'Svensson',
+            'first_name': self.first_name,
+            'last_name': self.last_name,
             'email': '',
+            'application': self.application
+        }
+        assert_data(self, data)
+
+    def test_validation_error_application_is_sent_back_to_application_accepted_template(self):
+        data = {
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'email': self.email,
+            'application': ''
         }
         assert_data(self, data)
 
@@ -108,6 +126,7 @@ class UserApplicationAcceptedPageTest(TestCase):
             'first_name': 'Emily',
             'last_name': 'Svensson',
             'email': '',
+            'application': self.application
         }
         self.client.post('/', data)
         self.assertEqual(AccreditatonApplication.objects.count(), 0)

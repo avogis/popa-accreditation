@@ -119,6 +119,7 @@ POSTMARK_SENDER = 'elizaveta@popaganda.se'
 POSTMARK_TEST_MODE = True
 
 POSTMARK_APPLICATION_SENT_TEMPLATE = 5293163
+POSTMARK_APPLICATION_GRANTE_TEMPLATE = 5295105
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/

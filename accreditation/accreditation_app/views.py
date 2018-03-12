@@ -14,11 +14,13 @@ def accreditation_page(request):
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
         email = request.POST['email']
+        application_text = request.POST['application']
 
         application = AccreditatonApplication.objects.create(
             first_name=first_name,
             last_name=last_name,
             email=email,
+            application=application_text
         )
         try:
             application.full_clean()
@@ -44,6 +46,7 @@ def accreditation_page(request):
             data = {
                 'error': e
             }
+        data['application'] = application_text
         return render(request, 'application_accepted.html', data)
     else:
         return render(request, 'accreditation.html')

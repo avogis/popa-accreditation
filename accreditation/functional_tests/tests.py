@@ -21,6 +21,7 @@ class NewVisitorTest(unittest.TestCase):
         self.name = 'Emily'
         self.surname = 'Svensson'
         self.email = 'emily.svensson@test.com'
+        self.application = 'I am photographer'
 
     def tearDown(self):
         self.browser.quit()
@@ -42,7 +43,10 @@ class NewVisitorTest(unittest.TestCase):
         # The user sees an inputbox where she can enter last name
         input_help_function(self, 'id_last_name', 'Last Name', self.surname)
 
-        # The user sees an inputbox where she can enter last name
+        # The user sees an inputbox where she can enter the reason for application
+        input_help_function(self, 'id_application', 'Reason for applying', self.application)
+
+        # The user sees an inputbox where she can enter email
         input_help_function(self, 'id_email', 'Email', self.email)
 
         # She clicks the send_button and then sees that the page updates to say
@@ -59,6 +63,9 @@ class NewVisitorTest(unittest.TestCase):
         )
         self.assertTrue(
             self.email in information_to_the_user_div
+        )
+        self.assertTrue(
+            self.application in information_to_the_user_div
         )
 
 

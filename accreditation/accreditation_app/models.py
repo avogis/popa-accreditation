@@ -12,6 +12,7 @@ class AccreditatonApplication(models.Model):
     last_name = models.CharField(null=False, blank=False, max_length=50, default='')
     email = models.EmailField(null=False, blank=False, default='')
     reviewed = models.BooleanField(default=False)
+    application = models.TextField(null=False, blank=False, default=None)
 
     def __str__(self):
         return "{} {} {}".format(self.first_name, self.last_name, self.email)

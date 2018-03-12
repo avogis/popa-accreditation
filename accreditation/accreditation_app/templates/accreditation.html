@@ -5,8 +5,13 @@
     <body>
         <h1>Apply for Popaganda Accreditation</h1>
         <form action="/" method="POST">
+            <label for="id_first_name">First Name</label>
             <input id="id_first_name" name="first_name" placeholder="First Name"/>
+            <label for="id_last_name">Last Name</label>
             <input id="id_last_name" name="last_name" placeholder="Last Name"/>
+            <label for="id_application">Application Text</label>
+            <input id="id_application" name="application" placeholder="Reason for applying"/>
+            <label for="id_email">Email</label>
             <input id="id_email" name="email" placeholder="Email"/>
             <input id='send_button' type="submit" value="OK">
             {% csrf_token %}
