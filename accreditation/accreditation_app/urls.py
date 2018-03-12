@@ -3,5 +3,5 @@ from accreditation_app import views
 
 
 urlpatterns = [
-    url(r'^$', views.accreditation_page, name='accreditation'),
+    url(r'^application_accepted/$', views.application_accepted, name='application_accepted'),
 ]

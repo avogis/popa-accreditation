@@ -3,6 +3,15 @@ import unittest
 import time
 
 
+def input_help_function(test, input_id, placeholder):
+    inputbox = test.browser.find_element_by_id(input_id)
+    test.assertEqual(
+        inputbox.get_attribute('placeholder'),
+        placeholder
+    )
+    inputbox.send_keys(test.name)
+
+
 class NewVisitorTest(unittest.TestCase):
 
     def setUp(self):
@@ -25,22 +34,20 @@ class NewVisitorTest(unittest.TestCase):
 
         # The header test says that the user can apply for accreditation
         header_text = self.browser.find_element_by_tag_name('h1').text
-        self.assertIn('Apply for Popaganda accreditation', header_text)
+        self.assertIn('Apply for Popaganda Accreditation', header_text)
 
         # The user sees an inputbox where she can enter first name
-        name_inputbox = self.browser.find_element_by_id('id_first_name')
-        self.assertEqual(
-            name_inputbox.get_attribute('placeholder'),
-            'First name'
-        )
+        input_help_function(self, 'id_first_name', 'First Name')
 
-        # She enters her name
+        # The user sees an inputbox where she can enter last name
+        input_help_function(self, 'id_last_name', 'Last Name')
 
-        name_inputbox.send_keys(self.name)
+        # The user sees an inputbox where she can enter last name
+        input_help_function(self, 'id_email', 'Email')
 
         # She clicks the send_button and then sees that the page updates to say
         # that her application will be reviewed and she will receive further info via email
-        self.browser.find_element_by_css_selector('.send_button').click()
+        self.browser.find_element_by_id('send_button').click()
         time.sleep(1)
 
         information_to_the_user_div = self.browser.find_element_by_id('id_user_info')

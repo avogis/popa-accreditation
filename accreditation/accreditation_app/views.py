@@ -1,5 +1,9 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def accreditation_page(request):
-    return HttpResponse('<html><title>Popaganda Accreditation</title></html>')
+    return render(request, 'accreditation.html')
+
+
+def application_accepted(request):
+    return render(request, 'application_accepted.html')
