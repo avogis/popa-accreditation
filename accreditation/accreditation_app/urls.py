@@ -1,7 +1,7 @@
-from django.urls import path
+from django.conf.urls import url
+from accreditation_app import views
 
-from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    url(r'^$', views.accreditation_page, name='accreditation'),
 ]

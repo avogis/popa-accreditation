@@ -18,5 +18,5 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    path('accreditation_app/', include('accreditation_app.urls')),
+    path('', include('accreditation_app.urls')),
 ]
