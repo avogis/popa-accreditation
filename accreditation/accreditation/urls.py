@@ -20,5 +20,5 @@ from accreditation_app import urls as accreditation_urls
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', accreditation_views.accreditation_page, name='accreditation_page'),
-    url(r'^accreditation_app/', include(accreditation_urls)),
+    # url(r'^accreditation_app/', include(accreditation_urls)),
 ]

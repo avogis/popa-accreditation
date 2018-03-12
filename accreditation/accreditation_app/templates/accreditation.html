@@ -4,9 +4,12 @@
     </head>
     <body>
         <h1>Apply for Popaganda Accreditation</h1>
-        <input id="id_first_name" placeholder="First Name"/>
-        <input id="id_last_name" placeholder="Last Name"/>
-        <input id="id_email" placeholder="Email"/>
-        <button id='send_button' type="button">Send</button>
+        <form action="/" method="POST">
+            <input id="id_first_name" name="first_name" placeholder="First Name"/>
+            <input id="id_last_name" name="last_name" placeholder="Last Name"/>
+            <input id="id_email" name="email" placeholder="Email"/>
+            <input id='send_button' type="submit" value="OK">
+            {% csrf_token %}
+        </form>
     </body>
 </html>
