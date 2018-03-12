@@ -5,7 +5,8 @@
     <body>
         {% if error %}
           <div class="form-group has-error">
-            <span class="help-block">{{ error }}</span>
+            <p>Your application was not sent due to the following errors:</p>
+            <p>{{ error }}</p>
           </div>
         {% else %}
         <h1>Your application has been accepted</h1>

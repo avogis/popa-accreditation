@@ -28,7 +28,7 @@ def accreditation_page(request):
                 'email': email,
             }
             pm = PMMail(
-                to='email',
+                to=email,
                 sender=POSTMARK_SENDER,
                 template_id=POSTMARK_APPLICATION_SENT_TEMPLATE,
                 template_model=data
@@ -40,6 +40,7 @@ def accreditation_page(request):
                 'error': e
             }
         except PMMailSendException as e:
+            application.delete()
             data = {
                 'error': e
             }
