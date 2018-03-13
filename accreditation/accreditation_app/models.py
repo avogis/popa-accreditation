@@ -20,7 +20,7 @@ def send_email(data, template_id=POSTMARK_APPLICATION_DECLINE_TEMPLATE, sender=P
     pm = PMMail(
         to=data['email'],
         sender=POSTMARK_SENDER,
-        template_id=POSTMARK_APPLICATION_GRANT_TEMPLATE,
+        template_id=template_id,
         template_model=data
     )
     pm.send()

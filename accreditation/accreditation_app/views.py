@@ -53,3 +53,7 @@ def accreditation_page(request):
         return render(request, 'application_accepted.html', data)
     else:
         return render(request, 'accreditation.html')
+
+
+def terms_conditons_page(request):
+    return render(request, 'terms_conditons.html')

@@ -12,13 +12,14 @@ Class-based views
 Including another URLconf
     1. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import include, url
+from django.conf.urls import url
 from django.contrib import admin
 from accreditation_app import views as accreditation_views
-from accreditation_app import urls as accreditation_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', accreditation_views.accreditation_page, name='accreditation_page'),
-    # url(r'^accreditation_app/', include(accreditation_urls)),
+    url(
+        r'^terms-conditions/', accreditation_views.terms_conditons_page, name='terms_conditons_page'
+    ),
 ]

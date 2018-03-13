@@ -58,6 +58,9 @@ class NewVisitorTest(unittest.TestCase):
         # The user sees an inputbox where she can enter email
         input_help_function(self, 'id_email', 'Email', self.email)
 
+        # The user agrees to terms and conditions
+        self.browser.find_element_by_id("id_terms").click()
+
         # She clicks the send_button and then sees that the page updates to say
         # that her application will be granted and she will receive further info via email
         self.browser.find_element_by_id('send_button').click()

@@ -6,20 +6,21 @@
         <h1>Apply for Popaganda Accreditation</h1>
         <form action="/" method="POST">
             <label for="id_first_name">First Name</label>
-            <input id="id_first_name" name="first_name" placeholder="First Name"/>
+            <input id="id_first_name" name="first_name" placeholder="First Name" required/>
             <label for="id_last_name">Last Name</label>
-            <input id="id_last_name" name="last_name" placeholder="Last Name"/>
+            <input id="id_last_name" name="last_name" placeholder="Last Name" required/>
             <label for="type_of_accreditation">Type of accreditation</label>
-            <select id="type_of_accreditation" name="type_of_accreditation">
+            <select id="type_of_accreditation" name="type_of_accreditation" required>
                 <option id="empty" value="" selected></option>
                 <option id="photo" value="photo">Photo Pass</option>
                 <option id="festival" value="festival">Festival Pass</option>
                 <option id="jounalist" value="jounalist">Journalist Pass</option>
             </select>
             <label for="id_application">Application Text</label>
-            <input id="id_application" name="application" placeholder="Futher information"/>
+            <input id="id_application" name="application" placeholder="Futher information" required/>
             <label for="id_email">Email</label>
-            <input id="id_email" name="email" placeholder="Email"/>
+            <input id="id_email" name="email" placeholder="Email" required/>
+            <input id="id_terms" type="checkbox" name="terms" required> I agree to  <a href="/terms-conditions/">Terms and Conditions</a>
             <input id='send_button' type="submit" value="OK">
             {% csrf_token %}
         </form>
