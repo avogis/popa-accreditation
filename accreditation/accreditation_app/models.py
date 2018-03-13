@@ -4,6 +4,7 @@ from postmark.core import PMMail, PMMailSendException
 
 from accreditation.settings import (
     POSTMARK_APPLICATION_DECLINE_TEMPLATE,
+    POSTMARK_APPLICATION_DISCOUNT_TEMPLATE,
     POSTMARK_APPLICATION_GRANT_TEMPLATE,
     POSTMARK_SENDER,
 )
@@ -33,6 +34,8 @@ class AccreditatonApplication(models.Model):
     declined = models.BooleanField(default=False)
     application = models.TextField(null=False, blank=False, default=None)
     applied = models.DateTimeField(auto_now_add=True)
+    discount_amount = models.IntegerField(null=True, blank=True, default=None)
+    discount_code = models.CharField(null=True, blank=True, max_length=50, default=None)
     type_of_accreditation = models.CharField(
         null=False,
         blank=False,
@@ -53,10 +56,15 @@ class AccreditatonApplication(models.Model):
         if self.granted and self.declined:
             raise ValidationError("Granted and declined are mutually exclusive.")
         if self.granted:
+            template_id = POSTMARK_APPLICATION_GRANT_TEMPLATE
+            if self.discount_amount and self.discount_code:
+                data['discount_amount'] = self.discount_amount
+                data['discount_code'] = self.discount_code
+                template_id = POSTMARK_APPLICATION_DISCOUNT_TEMPLATE
             try:
                 send_email(
                     data,
-                    POSTMARK_APPLICATION_GRANT_TEMPLATE,
+                    template_id,
                     POSTMARK_SENDER,
                 )
                 super(AccreditatonApplication, self).save(*args, **kwargs)
