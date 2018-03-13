@@ -3,7 +3,19 @@
     {{block.super}}
     <script type='text/javascript'>
         (function($) {
-            console.log( "ready!" );
+          $( document ).ready(function() {
+              type_of_accreditation_field_text = $(".field-type_of_accreditation").find('.readonly').text();
+              console.log(type_of_accreditation_field_text)
+              if (type_of_accreditation_field_text === "Photo Pass"){
+                $('.field-photo_type').show()
+                $('.field-discount_amount').hide()
+                $('.field-discount_code').hide()
+              }else{
+                $('.field-photo_type').hide()
+                $('.field-discount_amount').show()
+                $('.field-discount_code').show()
+              }
+          });
         })(django.jQuery);
     </script>
 {% endblock %}
