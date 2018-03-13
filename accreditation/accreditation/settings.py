@@ -75,29 +75,29 @@ WSGI_APPLICATION = 'accreditation.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-if 'test' in sys.argv:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': ':memory:',
-            'USER': '',
-            'PASSWORD': '',
-            'HOST': '',
-            'PORT': '',
-            'TEST_DATABASE_NAME': ":memory:"
-        }
+# if 'test' in sys.argv:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ':memory:',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+        'TEST_DATABASE_NAME': ":memory:"
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'accreditation',
-            'USER': 'popa-accreditation',
-            'PASSWORD': '',
-            'HOST': '127.0.0.1',
-            'PORT': '',
-        }
-    }
+}
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.mysql',
+#             'NAME': 'accreditation',
+#             'USER': 'popa-accreditation',
+#             'PASSWORD': 'DCTKpjq2nTTMWsACKTacxAGmbAnAtgjkH',
+#             'HOST': '127.0.0.1',
+#             'PORT': '',
+#         }
+#     }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
