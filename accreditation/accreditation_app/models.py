@@ -3,6 +3,12 @@ from django.db import models
 from postmark.core import PMMail, PMMailSendException
 
 from accreditation.settings import (
+    ACCREDITATION_CHOICE_PHOTO,
+    ACCREDITATION_CHOICE_JOURNALIST,
+    ACCREDITATION_CHOICE_FESTIVAl,
+    PHOTO_A,
+    PHOTO_B,
+    PHOTO_C,
     POSTMARK_APPLICATION_DECLINE_TEMPLATE,
     POSTMARK_APPLICATION_DISCOUNT_TEMPLATE,
     POSTMARK_APPLICATION_GRANT_TEMPLATE,
@@ -22,9 +28,14 @@ def send_email(data, template_id=POSTMARK_APPLICATION_DECLINE_TEMPLATE, sender=P
 
 class AccreditatonApplication(models.Model):
     TYPE_OF_ACCREDITATION_CHOICES = (
-        ('photo', 'Photo Pass'),
-        ('jounalist', 'Journalist Pass'),
-        ('festival', 'Festival Pass'),
+        (ACCREDITATION_CHOICE_PHOTO, 'Photo Pass'),
+        (ACCREDITATION_CHOICE_JOURNALIST, 'Journalist Pass'),
+        (ACCREDITATION_CHOICE_FESTIVAl, 'Festival Pass'),
+    )
+    TYPE_OF_PHOTO_CHOICES = (
+        (PHOTO_A, 'Photo Pass A'),
+        (PHOTO_B, 'Photo Pass B'),
+        (PHOTO_C, 'Photo Pass C'),
     )
 
     first_name = models.CharField(null=False, blank=False, max_length=50, default='')
@@ -41,6 +52,13 @@ class AccreditatonApplication(models.Model):
         blank=False,
         max_length=9,
         choices=TYPE_OF_ACCREDITATION_CHOICES,
+        default=None,
+    )
+    photo_type = models.CharField(
+        null=True,
+        blank=True,
+        max_length=1,
+        choices=TYPE_OF_PHOTO_CHOICES,
         default=None,
     )
 

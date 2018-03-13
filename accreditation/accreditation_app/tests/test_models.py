@@ -4,6 +4,7 @@ from mock import Mock, patch
 
 from accreditation_app.models import AccreditatonApplication
 from accreditation.settings import (
+    PHOTO_A,
     POSTMARK_APPLICATION_DECLINE_TEMPLATE,
     POSTMARK_APPLICATION_DISCOUNT_TEMPLATE,
     POSTMARK_APPLICATION_GRANT_TEMPLATE,
@@ -191,6 +192,36 @@ class AccreditatonApplicationModelTestSendsEmail(TestCase):
         mock_email.assert_called_with(
             data,
             POSTMARK_APPLICATION_DISCOUNT_TEMPLATE,
+            POSTMARK_SENDER,
+        )
+
+    def test_when_photo_and_photo_type_email_is_sent(self, mock_email):
+        application = AccreditatonApplication.objects.create(
+            first_name=self.first_name,
+            last_name=self.last_name,
+            email=self.email,
+            type_of_accreditation=self.type_of_accreditation,
+            application=self.application_text
+        )
+
+        mock_email.assert_not_called()
+        photo_type = PHOTO_A
+
+        application = AccreditatonApplication.objects.get(pk=1)
+        application.granted = True
+        application.photo_type = '{}'.format(photo_type)
+        application.declined = False
+        application.save()
+
+        data = {
+            'first_name': "{}".format(self.first_name),
+            'last_name': "{}".format(self.last_name),
+            'email': "{}".format(self.email),
+        }
+
+        mock_email.assert_called_with(
+            data,
+            POSTMARK_APPLICATION_GRANT_TEMPLATE,
             POSTMARK_SENDER,
         )
 
